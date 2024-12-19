@@ -1,0 +1,1 @@
+# qubership-grafana-plugins-init
