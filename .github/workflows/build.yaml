@@ -14,7 +14,7 @@ jobs:
       fail-fast: false
       matrix:
         component:
-          - name: qubership-env-checker
+          - name: qubership-grafana-plugins-init
             file: Dockerfile
     runs-on: ubuntu-latest
     steps:
