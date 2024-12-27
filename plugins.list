@@ -1,0 +1,18 @@
+# DataSources
+vertamedia-clickhouse-datasource 3.2.3
+simpod-json-datasource 0.6.5
+fifemon-graphql-datasource 1.3.0
+# ReactJS plugins
+briangann-gauge-panel 2.0.1
+timomyl-breadcrumb-panel 1.2.0
+jdbranham-diagram-panel 1.10.4
+novatec-sdg-panel 4.0.3
+vonage-status-panel 2.0.0
+gapit-htmlgraphics-panel 2.1.1
+aceiot-svg-panel 0.1.4
+# Applications
+grafana-oncall-app 1.13.11
+# There applications require Grafana 11.x
+#grafana-exploretraces-app 0.1.2
+#grafana-pyroscope-app 0.1.13
+#grafana-lokiexplore-app 1.0.1
