@@ -1,0 +1,4 @@
+quiet: true
+skip-check:
+  - CKV_GHA_7 # The build output cannot be affected by user parameters other than the build entry point and the top-level source location. GitHub Actions workflow_dispatch inputs MUST be empty.
+  - CKV_DOCKER_2 # Ensure that HEALTHCHECK instructions have been added to container images

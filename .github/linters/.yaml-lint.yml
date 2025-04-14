@@ -4,8 +4,8 @@
 
 # Exclude not required files
 ignore-from-file:
-  - .gitignore
-  - .yamlignore
+- .gitignore
+- .yamlignore
 
 rules:
   braces:

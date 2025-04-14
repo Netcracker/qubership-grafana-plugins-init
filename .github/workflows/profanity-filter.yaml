@@ -23,5 +23,7 @@ jobs:
     steps:
       - name: "Warning"
         run: |
-          echo "⚠️ Pull request from fork! ⚠️" >> $GITHUB_STEP_SUMMARY
-          echo "The action cannot be run over PRs from fork." >> $GITHUB_STEP_SUMMARY
+          {
+            echo "⚠️ Pull request from fork! ⚠️"
+            echo "The action cannot be run over PRs from fork."
+          } >> "$GITHUB_STEP_SUMMARY"
