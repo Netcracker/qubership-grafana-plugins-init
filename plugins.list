@@ -12,7 +12,6 @@ gapit-htmlgraphics-panel 2.1.1
 aceiot-svg-panel 0.1.4
 # Applications
 grafana-oncall-app 1.13.11
-# There applications require Grafana 11.x
-#grafana-exploretraces-app 0.1.2
-#grafana-pyroscope-app 0.1.13
-#grafana-lokiexplore-app 1.0.1
+grafana-exploretraces-app 0.1.2
+grafana-pyroscope-app 0.1.13
+grafana-lokiexplore-app 1.0.1
