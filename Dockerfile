@@ -1,6 +1,6 @@
 # hadolint global ignore=DL3018
 # Use the first layer to download plugins and next copy them to the final image
-FROM alpine:3.21.3 as builder
+FROM alpine:3.21.3 AS builder
 
 COPY ./download_plugins.sh ./plugins.list /
 
