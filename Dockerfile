@@ -1,4 +1,4 @@
-FROM alpine:3.20.3 as builder
+FROM alpine:3.21.3 as builder
 
 COPY ./download_plugins.sh ./plugins.list /
 
@@ -9,7 +9,7 @@ RUN apk add \
     && chmod +x /download_plugins.sh \
     && /download_plugins.sh
 
-FROM alpine:3.20.3
+FROM alpine:3.21.3
 
 ENV USER_UID=65534
 
