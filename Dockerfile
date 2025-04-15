@@ -1,4 +1,6 @@
-FROM alpine:3.20.3 as builder
+# hadolint global ignore=DL3018
+# Use the first layer to download plugins and next copy them to the final image
+FROM alpine:3.21.3 AS builder
 
 COPY ./download_plugins.sh ./plugins.list /
 
@@ -9,8 +11,10 @@ RUN apk add \
     && chmod +x /download_plugins.sh \
     && /download_plugins.sh
 
-FROM alpine:3.20.3
+# Tiny image with only the plugins and entrypoint script
+FROM alpine:3.21.3
 
+# User "nobody"
 ENV USER_UID=65534
 
 COPY --from=builder /tmp/plugins/ /etc/grafana/plugins/
