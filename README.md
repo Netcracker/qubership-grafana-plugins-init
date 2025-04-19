@@ -122,7 +122,7 @@ For build this image locally with custom plugins need:
     docker build .
     ```
 
-During build script `docker build` download all plugins as zip files into `/tmp/downloads`.
+During build script `docker build` download all plugins as ZIP files into `/tmp/downloads`.
 Then it unarchive all plugins into `/tmp/plugins`.
 
 And during build docker image docker will copy all files from `/tmp/plugins` to `/etc/grafana/plugins/`.
