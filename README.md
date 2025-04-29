@@ -13,6 +13,8 @@ These plugins are downloaded while this image build instead of init container ru
   * [JSON 0.6.6](https://grafana.com/grafana/plugins/simpod-json-datasource)
   * [GraphQL Data Source 1.3.0](https://grafana.com/grafana/plugins/fifemon-graphql-datasource)
   * [Infinity 3.2.0](https://grafana.com/grafana/plugins/yesoreyeram-infinity-datasource)
+  * [VictoriaMetrics 0.14.0](https://grafana.com/grafana/plugins/victoriametrics-metrics-datasource)
+  * [VictoriaLogs 0.16.3](https://grafana.com/grafana/plugins/victoriametrics-logs-datasource)
 * Applications:
   * [Grafana OnCall 1.15.6](https://grafana.com/grafana/plugins/grafana-oncall-app)
   * [Grafana Logs Drilldown 1.0.10](https://grafana.com/grafana/plugins/grafana-lokiexplore-app)
