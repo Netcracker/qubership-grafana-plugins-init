@@ -1,18 +1,20 @@
 # DataSources
-vertamedia-clickhouse-datasource 3.3.1
-simpod-json-datasource 0.6.6
 fifemon-graphql-datasource 1.3.0
+simpod-json-datasource 0.6.6
+vertamedia-clickhouse-datasource 3.3.1
+victoriametrics-logs-datasource 0.16.3
+victoriametrics-metrics-datasource 0.14.0
 yesoreyeram-infinity-datasource 3.2.0
 # ReactJS plugins
+aceiot-svg-panel 0.1.5
 briangann-gauge-panel 2.0.1
-timomyl-breadcrumb-panel 1.2.0
+gapit-htmlgraphics-panel 2.1.1
 jdbranham-diagram-panel 1.10.4
 novatec-sdg-panel 4.2.0
+timomyl-breadcrumb-panel 1.2.0
 vonage-status-panel 2.0.2
-gapit-htmlgraphics-panel 2.1.1
-aceiot-svg-panel 0.1.5
 # Applications
-grafana-oncall-app 1.15.6
-grafana-lokiexplore-app 1.0.10
 grafana-exploretraces-app 0.2.9
+grafana-lokiexplore-app 1.0.10
+grafana-oncall-app 1.15.6
 grafana-pyroscope-app 1.3.0
