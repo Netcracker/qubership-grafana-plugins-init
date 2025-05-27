@@ -1,5 +1,9 @@
 # Overview
 
+[![Build](https://github.com/Netcracker/qubership-grafana-plugins-init/actions/workflows/build.yaml/badge.svg)](https://github.com/Netcracker/qubership-grafana-plugins-init/actions/workflows/build.yaml)
+[![Check Links](https://github.com/Netcracker/qubership-grafana-plugins-init/actions/workflows/link-checker.yaml/badge.svg)](https://github.com/Netcracker/qubership-grafana-plugins-init/actions/workflows/link-checker.yaml)
+[![Super-Linter](https://github.com/Netcracker/qubership-grafana-plugins-init/actions/workflows/super-linter.yaml/badge.svg)](https://github.com/Netcracker/qubership-grafana-plugins-init/actions/workflows/super-linter.yaml)
+
 This init container is intended for grafana customization with predefined list of plugins.
 
 All the plugins listed in plugins list file will be added to grafana while appropriate grafana pod start in Kubernetes.
@@ -12,20 +16,21 @@ These plugins are downloaded while this image build instead of init container ru
   * [ClickHouse 3.3.1](https://grafana.com/grafana/plugins/vertamedia-clickhouse-datasource)
   * [JSON 0.6.6](https://grafana.com/grafana/plugins/simpod-json-datasource)
   * [GraphQL Data Source 1.3.0](https://grafana.com/grafana/plugins/fifemon-graphql-datasource)
-  * [Infinity 3.2.0](https://grafana.com/grafana/plugins/yesoreyeram-infinity-datasource)
+  * [Infinity 3.2.1](https://grafana.com/grafana/plugins/yesoreyeram-infinity-datasource)
+  * [VictoriaMetrics 0.15.1](https://grafana.com/grafana/plugins/victoriametrics-metrics-datasource)
+  * [VictoriaLogs 0.16.3](https://grafana.com/grafana/plugins/victoriametrics-logs-datasource)
 * Applications:
   * [Grafana OnCall 1.15.6](https://grafana.com/grafana/plugins/grafana-oncall-app)
-  * [Grafana Logs Drilldown 1.0.10](https://grafana.com/grafana/plugins/grafana-lokiexplore-app)
-  * [Grafana Traces Drilldown 0.2.9](https://grafana.com/grafana/plugins/grafana-exploretraces-app)
-  * [Grafana Profiles Drilldown 1.3.0](https://grafana.com/grafana/plugins/grafana-pyroscope-app)
+  * [Grafana Logs Drilldown 1.0.17](https://grafana.com/grafana/plugins/grafana-lokiexplore-app)
+  * [Grafana Traces Drilldown 1.0.0](https://grafana.com/grafana/plugins/grafana-exploretraces-app)
+  * [Grafana Profiles Drilldown 1.4.1](https://grafana.com/grafana/plugins/grafana-pyroscope-app)
 * Panels:
   * [Breadcrumb Panel 1.2.0](https://grafana.com/grafana/plugins/timomyl-breadcrumb-panel)
   * [D3 Gauge 2.0.1](https://grafana.com/grafana/plugins/briangann-gauge-panel)
   * [Diagram 1.10.4](https://grafana.com/grafana/plugins/jdbranham-diagram-panel)
-  * [Flow Charting 0.9.1](https://grafana.com/grafana/plugins/agenty-flowcharting-panel)
   * [Service Dependency Graph 4.2.0](https://grafana.com/grafana/plugins/novatec-sdg-panel)
   * [Status Panel 2.0.2](https://grafana.com/grafana/plugins/vonage-status-panel)
-  * [SVG 0.3.4](https://grafana.com/grafana/plugins/aceiot-svg-panel)
+  * [SVG 0.1.5](https://grafana.com/grafana/plugins/aceiot-svg-panel)
   * [HTML graphics 2.1.1](https://grafana.com/grafana/plugins/gapit-htmlgraphics-panel)
 
 ## How to it work
