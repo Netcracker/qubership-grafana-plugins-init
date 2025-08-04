@@ -1,6 +1,6 @@
 # hadolint global ignore=DL3018
 # Use the first layer to download plugins and next copy them to the final image
-FROM alpine:3.22.0 AS builder
+FROM alpine:3.22.1 AS builder
 
 COPY ./download_plugins.sh ./plugins.list /
 
@@ -12,7 +12,7 @@ RUN apk add \
     && /download_plugins.sh
 
 # Tiny image with only the plugins and entrypoint script
-FROM alpine:3.22.0
+FROM alpine:3.22.1
 
 # User "nobody"
 ENV USER_UID=65534
