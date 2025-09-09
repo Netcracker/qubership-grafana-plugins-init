@@ -9,6 +9,7 @@ yesoreyeram-infinity-datasource 3.5.0
 aceiot-svg-panel 0.1.5
 briangann-gauge-panel 2.0.1
 gapit-htmlgraphics-panel 2.2.1
+grafana-polystat-panel 2.1.15
 jdbranham-diagram-panel 1.10.4
 novatec-sdg-panel 4.2.0
 timomyl-breadcrumb-panel 1.2.0
