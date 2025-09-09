@@ -1,10 +1,10 @@
 # DataSources
-retrodaredevil-wildgraphql-datasource 1.5.0
+retrodaredevil-wildgraphql-datasource 1.5.1
 simpod-json-datasource 0.6.7
 vertamedia-clickhouse-datasource 3.4.4
-victoriametrics-logs-datasource 0.18.1
-victoriametrics-metrics-datasource 0.17.0
-yesoreyeram-infinity-datasource 3.3.0
+victoriametrics-logs-datasource 0.19.3
+victoriametrics-metrics-datasource 0.18.3
+yesoreyeram-infinity-datasource 3.5.0
 # ReactJS plugins
 aceiot-svg-panel 0.1.5
 briangann-gauge-panel 2.0.1
@@ -15,7 +15,7 @@ novatec-sdg-panel 4.2.0
 timomyl-breadcrumb-panel 1.2.0
 vonage-status-panel 2.0.4
 # Applications
-grafana-exploretraces-app 1.1.2
-grafana-lokiexplore-app 1.0.22
-grafana-oncall-app 1.16.4
-grafana-pyroscope-app 1.5.0
+grafana-exploretraces-app 1.1.3
+grafana-lokiexplore-app 1.0.26
+grafana-oncall-app 1.16.5
+grafana-pyroscope-app 1.8.1

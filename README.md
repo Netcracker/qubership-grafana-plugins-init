@@ -13,26 +13,26 @@ These plugins are downloaded while this image build instead of init container ru
 ## Plugins list
 
 * DataSources:
-  * [ClickHouse 3.4.4](https://grafana.com/grafana/plugins/vertamedia-clickhouse-datasource)
-  * [JSON 0.6.7](https://grafana.com/grafana/plugins/simpod-json-datasource)
-  * [GraphQL Data Source 1.5.0](https://grafana.com/grafana/plugins/retrodaredevil-wildgraphql-datasource)
-  * [Infinity 3.3.0](https://grafana.com/grafana/plugins/yesoreyeram-infinity-datasource)
-  * [VictoriaMetrics 0.17.0](https://grafana.com/grafana/plugins/victoriametrics-metrics-datasource)
-  * [VictoriaLogs 0.18.1](https://grafana.com/grafana/plugins/victoriametrics-logs-datasource)
+  * [ClickHouse ](https://grafana.com/grafana/plugins/vertamedia-clickhouse-datasource)
+  * [JSON](https://grafana.com/grafana/plugins/simpod-json-datasource)
+  * [GraphQL Data Source](https://grafana.com/grafana/plugins/retrodaredevil-wildgraphql-datasource)
+  * [Infinity](https://grafana.com/grafana/plugins/yesoreyeram-infinity-datasource)
+  * [VictoriaMetrics](https://grafana.com/grafana/plugins/victoriametrics-metrics-datasource)
+  * [VictoriaLogs](https://grafana.com/grafana/plugins/victoriametrics-logs-datasource)
 * Applications:
-  * [Grafana OnCall 1.16.3](https://grafana.com/grafana/plugins/grafana-oncall-app)
-  * [Grafana Logs Drilldown 1.0.22](https://grafana.com/grafana/plugins/grafana-lokiexplore-app)
-  * [Grafana Traces Drilldown 1.1.2](https://grafana.com/grafana/plugins/grafana-exploretraces-app)
-  * [Grafana Profiles Drilldown 1.5.0](https://grafana.com/grafana/plugins/grafana-pyroscope-app)
+  * [Grafana OnCall](https://grafana.com/grafana/plugins/grafana-oncall-app)
+  * [Grafana Logs Drilldown](https://grafana.com/grafana/plugins/grafana-lokiexplore-app)
+  * [Grafana Traces Drilldown](https://grafana.com/grafana/plugins/grafana-exploretraces-app)
+  * [Grafana Profiles Drilldown](https://grafana.com/grafana/plugins/grafana-pyroscope-app)
 * Panels:
-  * [Breadcrumb Panel 1.2.0](https://grafana.com/grafana/plugins/timomyl-breadcrumb-panel)
-  * [D3 Gauge 2.0.4](https://grafana.com/grafana/plugins/briangann-gauge-panel)
-  * [Diagram 1.10.4](https://grafana.com/grafana/plugins/jdbranham-diagram-panel)
-  * [HTML graphics 2.2.1](https://grafana.com/grafana/plugins/gapit-htmlgraphics-panel)
-  * [Polystat 2.1.15](https://grafana.com/grafana/plugins/grafana-polystat-panel)
-  * [Service Dependency Graph 4.2.0](https://grafana.com/grafana/plugins/novatec-sdg-panel)
-  * [Status Panel 2.0.2](https://grafana.com/grafana/plugins/vonage-status-panel)
-  * [SVG 0.1.5](https://grafana.com/grafana/plugins/aceiot-svg-panel)
+  * [Breadcrumb Panel](https://grafana.com/grafana/plugins/timomyl-breadcrumb-panel)
+  * [D3 Gauge](https://grafana.com/grafana/plugins/briangann-gauge-panel)
+  * [Diagram](https://grafana.com/grafana/plugins/jdbranham-diagram-panel)
+  * [HTML graphics](https://grafana.com/grafana/plugins/gapit-htmlgraphics-panel)
+  * [Polystat](https://grafana.com/grafana/plugins/grafana-polystat-panel)
+  * [Service Dependency Graph](https://grafana.com/grafana/plugins/novatec-sdg-panel)
+  * [Status Panel](https://grafana.com/grafana/plugins/vonage-status-panel)
+  * [SVG](https://grafana.com/grafana/plugins/aceiot-svg-panel)
 
 ## How to it work
 
