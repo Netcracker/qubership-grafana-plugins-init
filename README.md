@@ -13,7 +13,7 @@ These plugins are downloaded while this image build instead of init container ru
 ## Plugins list
 
 * DataSources:
-  * [ClickHouse ](https://grafana.com/grafana/plugins/vertamedia-clickhouse-datasource)
+  * [ClickHouse](https://grafana.com/grafana/plugins/vertamedia-clickhouse-datasource)
   * [JSON](https://grafana.com/grafana/plugins/simpod-json-datasource)
   * [GraphQL Data Source](https://grafana.com/grafana/plugins/retrodaredevil-wildgraphql-datasource)
   * [Infinity](https://grafana.com/grafana/plugins/yesoreyeram-infinity-datasource)
@@ -39,7 +39,7 @@ These plugins are downloaded while this image build instead of init container ru
 During build grafana-plugin-init container all plugins download from
 [https://grafana.com/api/plugins](https://grafana.com/api/plugins)
 (User interface available by link [https://grafana.com/grafana/plugins/](https://grafana.com/grafana/plugins/))
-and add into docker image.
+and add into Docker image.
 
 When operator create or update Grafana deployment it create deployment with two containers:
 
@@ -131,4 +131,4 @@ For build this image locally with custom plugins need:
 During build script `docker build` download all plugins as ZIP files into `/tmp/downloads`.
 Then it unarchive all plugins into `/tmp/plugins`.
 
-And during build docker image docker will copy all files from `/tmp/plugins` to `/etc/grafana/plugins/`.
+And during build Docker image Docker will copy all files from `/tmp/plugins` to `/etc/grafana/plugins/`.
