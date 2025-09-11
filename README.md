@@ -20,7 +20,6 @@ These plugins are downloaded while this image build instead of init container ru
   * [VictoriaMetrics](https://grafana.com/grafana/plugins/victoriametrics-metrics-datasource)
   * [VictoriaLogs](https://grafana.com/grafana/plugins/victoriametrics-logs-datasource)
 * Applications:
-  * [Grafana OnCall](https://grafana.com/grafana/plugins/grafana-oncall-app)
   * [Grafana Logs Drilldown](https://grafana.com/grafana/plugins/grafana-lokiexplore-app)
   * [Grafana Traces Drilldown](https://grafana.com/grafana/plugins/grafana-exploretraces-app)
   * [Grafana Profiles Drilldown](https://grafana.com/grafana/plugins/grafana-pyroscope-app)
