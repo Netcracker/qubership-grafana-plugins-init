@@ -21,7 +21,7 @@ echo "Start to read file with plugins ..."
 while IFS='' read -r line || [[ -n "${line}" ]]; do
     [[ "$line" =~ ^# ]] && continue
 
-    read -r -a array <<< "$line"
+    read -r -a array <<<"$line"
     plugin_name=${array[0]}
     version=${array[1]}
 
