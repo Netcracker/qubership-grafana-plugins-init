@@ -19,20 +19,19 @@ mkdir -p ${DOWNLOADS_PATH} ${DESTINATION_PATH}
 
 echo "Start to read file with plugins ..."
 while IFS='' read -r line || [[ -n "${line}" ]]; do
-    if [[ "${line}" != \#* ]]; then
-        array=( ${line} )
+    [[ "$line" =~ ^# ]] && continue
 
-        plugin_name=${array[0]}
-        version=${array[1]}
+    read -r -a array <<< "$line"
+    plugin_name=${array[0]}
+    version=${array[1]}
 
-        echo "Try to download plugin: ${plugin_name} - ${version}..."
-        wget --no-check-certificate -P "${DOWNLOADS_PATH}/${plugin_name}" \
-            -r -nd --quiet --no-parent \
-            "${REGISTRY_URL}/${plugin_name}/versions/${version}/download" \
+    echo "Try to download plugin: ${plugin_name} - ${version}..."
+    wget --no-check-certificate -P "${DOWNLOADS_PATH}/${plugin_name}" \
+        -r -nd --quiet --no-parent \
+        "${REGISTRY_URL}/${plugin_name}/versions/${version}/download"
 
-        unzip "${DOWNLOADS_PATH}/${plugin_name}/download" -d ${DESTINATION_PATH}
-    fi
-done < "plugins.list"
+    unzip "${DOWNLOADS_PATH}/${plugin_name}/download" -d ${DESTINATION_PATH}
+done <"plugins.list"
 echo "Official plugins successfully downloaded"
 
 ######################################################################################################################
@@ -47,7 +46,7 @@ while IFS='' read -r plugin || [[ -n "${plugin}" ]]; do
     wget -q -O "${DOWNLOADS_PATH}/${plugin}.zip" \
         "${OLD_PLUGINS_RELEASE_URL}/${plugin}.zip"
     unzip -q "${DOWNLOADS_PATH}/${plugin}.zip" -d "${DESTINATION_PATH}"
-done < "old_plugins.list"
+done <"old_plugins.list"
 
 echo "Old AngularJS plugins successfully downloaded"
 
