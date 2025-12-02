@@ -2,7 +2,7 @@
 # Use the first layer to download plugins and next copy them to the final image
 FROM alpine:3.22.2 AS builder
 
-COPY ./download_plugins.sh ./plugins.list /
+COPY ./download_plugins.sh ./plugins.list ./old_plugins.list /
 
 RUN apk add \
         bash \

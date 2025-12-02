@@ -8,6 +8,8 @@ REGISTRY_URL="https://grafana.com/api/plugins"
 TEMP_PATH="/tmp"
 DOWNLOADS_PATH="${TEMP_PATH}/downloads"
 DESTINATION_PATH="${TEMP_PATH}/plugins"
+RELEASE_VERSION="old-plugins"
+OLD_PLUGINS_RELEASE_URL="https://github.com/Netcracker/qubership-grafana-plugins-init/releases/download/${RELEASE_VERSION}"
 
 ######################################################################################################################
 #                                                  Download plugins                                                  #
@@ -31,7 +33,23 @@ while IFS='' read -r line || [[ -n "${line}" ]]; do
     unzip "${DOWNLOADS_PATH}/${plugin_name}/download" -d ${DESTINATION_PATH}
   fi
 done < "plugins.list"
-echo "Plugins successfully downloaded"
+echo "Official plugins successfully downloaded"
+
+######################################################################################################################
+#                                  Download old AngularJS plugins from old_plugins.list                              #
+######################################################################################################################
+
+echo "Start to download old AngularJS plugins..."
+while IFS='' read -r plugin || [[ -n "${plugin}" ]]; do
+  [[ "${plugin}" =~ ^# ]] && continue
+
+  echo "Downloading old plugin ${plugin} from GitHub Release..."
+  wget -q -O "${DOWNLOADS_PATH}/${plugin}.zip" \
+       "${OLD_PLUGINS_RELEASE_URL}/${plugin}.zip"
+  unzip -q "${DOWNLOADS_PATH}/${plugin}.zip" -d "${DESTINATION_PATH}"
+done < "old_plugins.list"
+
+echo "Old AngularJS plugins successfully downloaded"
 
 echo "Print downloaded plugins into directory:"
 ls -lah "${DOWNLOADS_PATH}"
