@@ -45,7 +45,7 @@ while IFS='' read -r plugin || [[ -n "${plugin}" ]]; do
 
     echo "Downloading old plugin ${plugin} from GitHub Release..."
     wget -q -O "${DOWNLOADS_PATH}/${plugin}.zip" \
-         "${OLD_PLUGINS_RELEASE_URL}/${plugin}.zip"
+        "${OLD_PLUGINS_RELEASE_URL}/${plugin}.zip"
     unzip -q "${DOWNLOADS_PATH}/${plugin}.zip" -d "${DESTINATION_PATH}"
 done < "old_plugins.list"
 
