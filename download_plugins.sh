@@ -19,19 +19,19 @@ mkdir -p ${DOWNLOADS_PATH} ${DESTINATION_PATH}
 
 echo "Start to read file with plugins ..."
 while IFS='' read -r line || [[ -n "${line}" ]]; do
-  if [[ "${line}" != \#* ]]; then
-    array=( ${line} )
+    if [[ "${line}" != \#* ]]; then
+        array=( ${line} )
 
-    plugin_name=${array[0]}
-    version=${array[1]}
+        plugin_name=${array[0]}
+        version=${array[1]}
 
-    echo "Try to download plugin: ${plugin_name} - ${version}..."
-    wget --no-check-certificate -P "${DOWNLOADS_PATH}/${plugin_name}" \
-        -r -nd --quiet --no-parent \
-        "${REGISTRY_URL}/${plugin_name}/versions/${version}/download" \
+        echo "Try to download plugin: ${plugin_name} - ${version}..."
+        wget --no-check-certificate -P "${DOWNLOADS_PATH}/${plugin_name}" \
+            -r -nd --quiet --no-parent \
+            "${REGISTRY_URL}/${plugin_name}/versions/${version}/download" \
 
-    unzip "${DOWNLOADS_PATH}/${plugin_name}/download" -d ${DESTINATION_PATH}
-  fi
+        unzip "${DOWNLOADS_PATH}/${plugin_name}/download" -d ${DESTINATION_PATH}
+    fi
 done < "plugins.list"
 echo "Official plugins successfully downloaded"
 
@@ -41,12 +41,12 @@ echo "Official plugins successfully downloaded"
 
 echo "Start to download old AngularJS plugins..."
 while IFS='' read -r plugin || [[ -n "${plugin}" ]]; do
-  [[ "${plugin}" =~ ^# ]] && continue
+    [[ "${plugin}" =~ ^# ]] && continue
 
-  echo "Downloading old plugin ${plugin} from GitHub Release..."
-  wget -q -O "${DOWNLOADS_PATH}/${plugin}.zip" \
-       "${OLD_PLUGINS_RELEASE_URL}/${plugin}.zip"
-  unzip -q "${DOWNLOADS_PATH}/${plugin}.zip" -d "${DESTINATION_PATH}"
+    echo "Downloading old plugin ${plugin} from GitHub Release..."
+    wget -q -O "${DOWNLOADS_PATH}/${plugin}.zip" \
+         "${OLD_PLUGINS_RELEASE_URL}/${plugin}.zip"
+    unzip -q "${DOWNLOADS_PATH}/${plugin}.zip" -d "${DESTINATION_PATH}"
 done < "old_plugins.list"
 
 echo "Old AngularJS plugins successfully downloaded"
