@@ -10,7 +10,7 @@
   "automerge": true,
   "platformAutomerge": false,
   "schedule": [
-    "every week on Monday"
+    "every 1 weeks on Monday"
   ],
   "dockerfile": {
     "enabled": true
@@ -18,9 +18,7 @@
   "customManagers": [
     {
       "customType": "regex",
-      "fileMatch": [
-        "^plugins\\.list$"
-      ],
+      "managerFilePatterns": ["/^plugins\\.list$/"],
       "matchStrings": [
         "^(?<depName>[a-z0-9-]+)\\s+(?<currentValue>\\d+\\.\\d+\\.\\d+)\\s*$"
       ],
