@@ -6,7 +6,7 @@ victoriametrics-metrics-datasource 0.21.0
 victoriametrics-logs-datasource 0.24.1
 yesoreyeram-infinity-datasource 3.7.1
 # ReactJS plugins
-aceiot-svg-panel 0.1.5
+aceiot-svg-panel 0.2.0
 briangann-gauge-panel 2.0.1
 gapit-htmlgraphics-panel 2.2.3
 grafana-polystat-panel 2.1.15
