@@ -17,5 +17,5 @@ vonage-status-panel 2.0.4
 # Applications
 grafana-metricsdrilldown-app 1.0.30
 grafana-exploretraces-app 1.3.2
-grafana-lokiexplore-app 1.0.32
+grafana-lokiexplore-app 1.0.35
 grafana-pyroscope-app 1.16.0
