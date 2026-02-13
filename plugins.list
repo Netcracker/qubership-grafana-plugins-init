@@ -2,7 +2,7 @@
 retrodaredevil-wildgraphql-datasource 1.5.1
 simpod-json-datasource 0.6.7
 vertamedia-clickhouse-datasource 3.4.8
-victoriametrics-metrics-datasource 0.19.7
+victoriametrics-metrics-datasource 0.21.0
 victoriametrics-logs-datasource 0.23.2
 yesoreyeram-infinity-datasource 3.7.1
 # ReactJS plugins
