@@ -25,6 +25,16 @@
       "datasourceTemplate": "custom.grafana-plugins"
     }
   ],
+  "packageRules": [
+    {
+      "matchManagers": ["github-actions"],
+      "groupName": "github-actions"
+    },
+    {
+      "matchDatasources": ["custom.grafana-plugins"],
+      "groupName": "grafana-plugins"
+    }
+  ],
   "customDatasources": {
     "grafana-plugins": {
       "defaultRegistryUrlTemplate": "https://grafana.com/api/plugins/{{packageName}}/versions",
