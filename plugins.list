@@ -1,7 +1,7 @@
 # DataSources
 retrodaredevil-wildgraphql-datasource 1.5.1
 simpod-json-datasource 0.6.7
-vertamedia-clickhouse-datasource 3.4.9
+vertamedia-clickhouse-datasource 3.4.10
 victoriametrics-metrics-datasource 0.23.1
 victoriametrics-logs-datasource 0.26.3
 yesoreyeram-infinity-datasource 3.7.4
