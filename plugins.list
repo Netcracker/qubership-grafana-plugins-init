@@ -16,6 +16,6 @@ timomyl-breadcrumb-panel 1.2.0
 vonage-status-panel 2.0.4
 # Applications
 grafana-metricsdrilldown-app 2.0.2
-grafana-exploretraces-app 2.0.1
+grafana-exploretraces-app 2.0.2
 grafana-lokiexplore-app 2.0.3
-grafana-pyroscope-app 2.0.3
+grafana-pyroscope-app 2.0.4
