@@ -7,7 +7,7 @@ victoriametrics-logs-datasource 0.26.3
 yesoreyeram-infinity-datasource 3.8.0
 # ReactJS plugins
 aceiot-svg-panel 0.2.0
-briangann-gauge-panel 2.0.1
+briangann-gauge-panel 2.2.0
 gapit-htmlgraphics-panel 2.2.3
 grafana-polystat-panel 2.1.16
 jdbranham-diagram-panel 1.10.4
@@ -15,7 +15,7 @@ novatec-sdg-panel 4.2.0
 timomyl-breadcrumb-panel 1.2.0
 vonage-status-panel 2.0.4
 # Applications
-grafana-metricsdrilldown-app 2.0.2
+grafana-metricsdrilldown-app 2.0.3
 grafana-exploretraces-app 2.0.2
 grafana-lokiexplore-app 2.0.3
 grafana-pyroscope-app 2.0.4
