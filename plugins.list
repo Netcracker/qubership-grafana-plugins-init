@@ -4,7 +4,7 @@ simpod-json-datasource 0.6.7
 vertamedia-clickhouse-datasource 3.4.11
 victoriametrics-metrics-datasource 0.25.0
 victoriametrics-logs-datasource 0.28.0
-yesoreyeram-infinity-datasource 3.8.1
+yesoreyeram-infinity-datasource 3.9.0
 # ReactJS plugins
 aceiot-svg-panel 0.2.0
 briangann-gauge-panel 2.2.0
