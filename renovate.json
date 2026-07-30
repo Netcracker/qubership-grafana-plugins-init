@@ -9,9 +9,6 @@
   ],
   "automerge": true,
   "platformAutomerge": false,
-  "schedule": [
-    "every 1 weeks on Monday"
-  ],
   "dockerfile": {
     "enabled": true
   }
