@@ -69,9 +69,6 @@ ls -lah "${DOWNLOADS_PATH}"
 
 echo "Plugins download process successfully complete"
 
-echo "Rename folder 'dist' of novatec-sdg plugin to old name 'novatec-sdg-panel'"
-mv "${DESTINATION_PATH}/dist" "${DESTINATION_PATH}/novatec-sdg-panel"
-
 echo "List of plugins directories:"
 ls -lah "${DESTINATION_PATH}"
 
