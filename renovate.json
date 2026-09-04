@@ -1,47 +1,15 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:best-practices",
+    "github>Netcracker/renovate-config:base",
+    "github>Netcracker/renovate-config:github-actions",
+    "github>Netcracker/renovate-config:netcracker-dependencies",
+    "github>Netcracker/renovate-config:grafana-plugins",
     ":enablePreCommit"
-  ],
-  "labels": [
-    "dependencies"
   ],
   "automerge": true,
   "platformAutomerge": false,
-  "schedule": [
-    "every 1 weeks on Monday"
-  ],
   "dockerfile": {
     "enabled": true
-  },
-  "customManagers": [
-    {
-      "customType": "regex",
-      "managerFilePatterns": ["**/plugins.list"],
-      "matchStrings": [
-        "(?<depName>[a-z0-9-]+)\\s+(?<currentValue>\\d+\\.\\d+\\.\\d+)"
-      ],
-      "datasourceTemplate": "custom.grafana-plugins"
-    }
-  ],
-  "packageRules": [
-    {
-      "matchManagers": ["github-actions"],
-      "groupName": "github-actions"
-    },
-    {
-      "matchDatasources": ["custom.grafana-plugins"],
-      "groupName": "grafana-plugins"
-    }
-  ],
-  "customDatasources": {
-    "grafana-plugins": {
-      "defaultRegistryUrlTemplate": "https://grafana.com/api/plugins/{{packageName}}/versions",
-      "format": "json",
-      "transformTemplates": [
-        "{\"releases\": items.{\"version\": version, \"releaseTimestamp\": createdAt}}"
-      ]
-    }
   }
 }
