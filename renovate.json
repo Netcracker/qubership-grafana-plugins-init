@@ -7,9 +7,20 @@
     "github>Netcracker/renovate-config:grafana-plugins",
     ":enablePreCommit"
   ],
-  "automerge": true,
-  "platformAutomerge": false,
+  "platformAutomerge": true,
   "dockerfile": {
     "enabled": true
-  }
+  },
+  "packageRules": [
+    {
+      "description": "Automerge low-risk updates once the required checks pass. Major bumps stay manual.",
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "pin",
+        "digest"
+      ],
+      "automerge": true
+    }
+  ]
 }

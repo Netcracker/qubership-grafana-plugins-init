@@ -17,13 +17,6 @@ on:
   pull_request:
     branches:
     - '**'
-    paths-ignore:
-    - 'docs/**'
-    - 'CODE-OF-CONDUCT.md'
-    - 'CONTRIBUTING.md'
-    - 'LICENSE'
-    - 'README.md'
-    - 'SECURITY.md'
 
 permissions:
   contents: read
@@ -81,3 +74,15 @@ jobs:
         provenance: false
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
+
+  # Stable check name for the branch ruleset: the build job is a matrix, so its own
+  # check name carries the matrix values and changes whenever the matrix does.
+  docker_build_gate:
+    name: Docker Build Gate
+    needs: [multiplatform_build]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+    - name: Fail if the build did not succeed
+      if: contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled') || contains(needs.*.result, 'skipped')
+      run: exit 1
