@@ -96,3 +96,16 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         DEFAULT_BRANCH: ${{ github.event.pull_request.base.ref || github.event.push.ref }}
 
+
+  # Stable check name for the branch ruleset. Without it, a failure in
+  # prepare-configs skips run-lint, and a required check that never reports
+  # leaves the pull request blocked rather than red.
+  lint_gate:
+    name: Lint Gate
+    needs: [prepare-configs, run-lint]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+    - name: Fail if any lint job did not succeed
+      if: contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled') || contains(needs.*.result, 'skipped')
+      run: exit 1
