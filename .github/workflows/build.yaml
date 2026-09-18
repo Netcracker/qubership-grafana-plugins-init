@@ -80,7 +80,9 @@ jobs:
           set -euo pipefail
 
           plugin_dir=$(mktemp -d)
-          trap 'rm -rf "$plugin_dir"' EXIT
+          # The image runs as uid 65534, so copied plugin files are not owned by
+          # the runner. chmod on the empty temp dir does not apply to them.
+          trap 'sudo rm -rf "$plugin_dir"' EXIT
           chmod 0777 "$plugin_dir"
 
           docker run --rm \
