@@ -1,88 +1,196 @@
 ---
 name: Build Artifacts
+run-name: "Ref: ${{ github.ref_name }}. On ${{ github.event_name }}"
 
 on:
   release:
     types: [created]
   push:
-    branches-ignore:
-    - 'renovate/**'
-    paths-ignore:
-    - 'docs/**'
-    - 'CODE-OF-CONDUCT.md'
-    - 'CONTRIBUTING.md'
-    - 'LICENSE'
-    - 'README.md'
-    - 'SECURITY.md'
+    branches:
+      - main
   pull_request:
     branches:
-    - '**'
+      - "**"
 
-permissions:
-  contents: read
+permissions: {}
 
 concurrency:
-  # On main/release, we don't want any jobs cancelled so the sha is used to name the group
-  # On PR branches, we cancel the job if new commits are pushed
-  # More info: https://stackoverflow.com/a/68422069/253468
-  group: ${{ github.ref == 'refs/heads/main' && format('ci-main-{0}', github.sha) || format('ci-main-{0}', github.ref) }}
-  cancel-in-progress: true
+  group: ${{ github.event_name == 'pull_request' && format('build-pr-{0}', github.ref) || format('build-{0}', github.sha) }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
-  multiplatform_build:
-    permissions:
-      packages: write
-      contents: read
-    strategy:
-      fail-fast: false
-      matrix:
-        component:
-        - name: qubership-grafana-plugins-init
-          file: Dockerfile
-          context: .
+  changes:
+    name: Detect relevant changes
     runs-on: ubuntu-latest
-    name: Docker Build
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      pull-requests: read
+    outputs:
+      container: ${{ github.event_name == 'release' || steps.filter.outputs.container }}
     steps:
-    - name: Checkout
-      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-    - name: Docker meta
-      id: meta
-      uses: docker/metadata-action@dc802804100637a589fabce1cb79ff13a1411302 # v6
-      with:
-        images: |
-          ghcr.io/${{ github.repository_owner }}/${{ matrix.component.name }}
-        tags: |
-          type=ref,event=branch
-          type=ref,event=tag
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@37fe631027851001ddb9b187196cc803df7f5f0e # v4
-    - name: Login to Docker Hub
-      uses: docker/login-action@dbcb813823bdd20940b903addbd779551569679f # v4
-      with:
-        registry: ghcr.io
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
-    - name: Build and push
-      uses: docker/build-push-action@53b7df96c91f9c12dcc8a07bcb9ccacbed38856a # v7
-      with:
-        no-cache: true
-        context: ${{ matrix.component.context }}
-        file: ${{ matrix.component.file }}
-        platforms: linux/amd64,linux/arm64
-        # See https://docs.github.com/en/code-security/dependabot/working-with-dependabot/automating-dependabot-with-github-actions#fetching-metadata-about-a-pull-request
-        push: ${{ github.event_name != 'pull_request' }}
-        provenance: false
-        tags: ${{ steps.meta.outputs.tags }}
-        labels: ${{ steps.meta.outputs.labels }}
+      - name: Checkout push
+        if: github.event_name == 'push'
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 100
+          persist-credentials: false
+      - name: Detect changed paths
+        id: filter
+        if: github.event_name != 'release'
+        uses: dorny/paths-filter@ceb8a2b8f2d89434be7ff52d3de7ec3738c5cc9d # v4.0.3
+        with:
+          filters: |
+            container:
+              - '.github/workflows/build.yaml'
+              - 'Dockerfile'
+              - 'download_plugins.sh'
+              - 'entrypoint.sh'
+              - 'plugins.list'
+              - 'old_plugins.list'
 
-  # Stable check name for the branch ruleset: the build job is a matrix, so its own
-  # check name carries the matrix values and changes whenever the matrix does.
+  runtime_smoke:
+    name: Build and smoke-test container
+    needs: changes
+    if: needs.changes.outputs.container != 'false'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@37fe631027851001ddb9b187196cc803df7f5f0e # v4.3.0
+      - name: Build test image
+        uses: docker/build-push-action@53b7df96c91f9c12dcc8a07bcb9ccacbed38856a # v7.3.0
+        with:
+          context: .
+          file: Dockerfile
+          load: true
+          no-cache: true
+          platforms: linux/amd64
+          provenance: false
+          push: false
+          tags: qubership-grafana-plugins-init:ci
+      - name: Verify plugin copy contract
+        run: |
+          set -euo pipefail
+
+          plugin_dir=$(mktemp -d)
+          # The image runs as uid 65534, so copied plugin files are not owned by
+          # the runner. chmod on the empty temp dir does not apply to them.
+          trap 'sudo rm -rf "$plugin_dir"' EXIT
+          chmod 0777 "$plugin_dir"
+
+          docker run --rm \
+            --volume "$plugin_dir:/opt/plugins" \
+            qubership-grafana-plugins-init:ci
+
+          echo "Copied plugin tree:"
+          find "$plugin_dir" -mindepth 1 -maxdepth 3 -print | sort
+
+          expected_count=0
+          missing=0
+          while IFS= read -r line || [[ -n "$line" ]]; do
+            if [[ -z "$line" || "$line" == \#* ]]; then
+              continue
+            fi
+
+            read -r -a plugin_fields <<<"$line"
+            plugin_id="${plugin_fields[0]}"
+            if [[ -z "$plugin_id" ]]; then
+              continue
+            fi
+            expected_count=$((expected_count + 1))
+            if ! find "$plugin_dir" -mindepth 1 -type d -name "$plugin_id" -print -quit | grep -q .; then
+              echo "Expected plugin directory was not copied: $plugin_id" >&2
+              missing=1
+            fi
+          done < plugins.list
+
+          while IFS= read -r plugin || [[ -n "$plugin" ]]; do
+            if [[ -z "$plugin" || "$plugin" == \#* ]]; then
+              continue
+            fi
+            expected_count=$((expected_count + 1))
+          done < old_plugins.list
+
+          if [[ "$expected_count" -eq 0 ]]; then
+            echo "plugins.list and old_plugins.list do not contain any plugins" >&2
+            exit 1
+          fi
+
+          found_count=$(find "$plugin_dir" -name plugin.json | wc -l)
+          if [[ "$found_count" -lt "$expected_count" ]]; then
+            echo "Expected at least $expected_count plugin.json files, found $found_count" >&2
+            exit 1
+          fi
+
+          if [[ "$missing" -ne 0 ]]; then
+            exit 1
+          fi
+
+  publish_image:
+    name: Publish container image
+    needs: [changes, runtime_smoke]
+    if: >-
+      (github.event_name == 'release' ||
+      (github.event_name == 'push' && github.ref == 'refs/heads/main')) &&
+      needs.changes.result == 'success' &&
+      needs.runtime_smoke.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Create image metadata
+        id: meta
+        uses: docker/metadata-action@dc802804100637a589fabce1cb79ff13a1411302 # v6.2.0
+        with:
+          images: ghcr.io/${{ github.repository_owner }}/qubership-grafana-plugins-init
+          tags: |
+            type=ref,event=branch
+            type=ref,event=tag
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@96fe6ef7f33517b61c61be40b68a1882f3264fb8 # v4.2.0
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@37fe631027851001ddb9b187196cc803df7f5f0e # v4.3.0
+      - name: Log in to GHCR
+        uses: docker/login-action@dbcb813823bdd20940b903addbd779551569679f # v4.6.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build and push container image
+        uses: docker/build-push-action@53b7df96c91f9c12dcc8a07bcb9ccacbed38856a # v7.3.0
+        with:
+          context: .
+          file: Dockerfile
+          no-cache: true
+          platforms: linux/amd64,linux/arm64
+          provenance: false
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+
   docker_build_gate:
     name: Docker Build Gate
-    needs: [multiplatform_build]
-    if: always()
+    needs: [changes, runtime_smoke]
+    if: ${{ always() && github.event_name == 'pull_request' }}
     runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions: {}
     steps:
-    - name: Fail if the build did not succeed
-      if: contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled') || contains(needs.*.result, 'skipped')
-      run: exit 1
+      - name: Require validation when applicable
+        if: >-
+          needs.changes.result != 'success' ||
+          (needs.changes.outputs.container != 'false' && needs.runtime_smoke.result != 'success')
+        run: exit 1
